@@ -1,24 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+//STYLING
+import { Route, Routes } from "react-router-dom";
+import "./App.css";
+import CropingImage from "./components/crop";
+import { History } from "./components/history/history";
+import React from "react";
+import ImageToPdfConverter from "./components/imageToPdf/imageToPdf";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={<CropingImage />} />
+      <Route path="/history" element={<History />} />
+      <Route path="/image2pdf" element={<ImageToPdfConverter />} />
+    </Routes>
   );
 }
 
