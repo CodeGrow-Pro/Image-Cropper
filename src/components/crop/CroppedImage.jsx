@@ -3,37 +3,15 @@ import { Group, Stack, Paper, Button, Text } from "@mantine/core";
 import { IconAlertCircle, IconCheck } from "@tabler/icons";
 import { saveAs } from 'file-saver';
 import axios from "axios";
+import convertBlobUrlToFile from "../../utils/convertInFIle";
+import { uploadImage } from "../../utils/apis";
 
 
 const CroppedImage = ({ img, setCloseImage }) => {
   const downloadImage = () => {
     saveAs(img, "image.jpg");
   };
-  // const uploadImage = async () => {
-  //   try {
-  //     const body = new FormData()
-  //     const fileImage = new File([img],new Date()+'cropped',{ type: 'application/png' })
-  //     const reqFileObject = {
-  //       fieldname: 'upload',
-  //       originalname: fileImage.name,
-  //       encoding: '7bit',
-  //       mimetype: fileImage.type,
-  //       destination: './uploads/profile',
-  //       filename: `upload${Date.now()}-${Math.floor(Math.random() * 1000)}.pdf`, // Generate a unique filename
-  //       path: `uploads\\profile\\upload${Date.now()}-${Math.floor(Math.random() * 1000)}.pdf`, // Adjust as needed
-  //       size: fileImage.size
-  //   };
-  //     body.append('upload', reqFileObject)
-  //     const response = await axios.post('http://localhost:3312/gallary/v1/image/63e1532bac33633a3df896e3', body, {
-  //       headers: {"Content-Type":'multipart/form-data'}
-  //     })
-  //    if(response.data.data){
-  //     alert("Image upload successfully!")
-  //    }
-  //   } catch (error) {
-  //     alert("Image upload failed!")
-  //   }
-  // }
+
   return (
     <div
       style={{
@@ -92,7 +70,7 @@ const CroppedImage = ({ img, setCloseImage }) => {
               onClick={() => {
                 downloadImage();
                 setCloseImage("");
-                // uploadImage()
+                uploadImage(img);
               }}
               sx={{ height: "auto" }}
               p="sm"

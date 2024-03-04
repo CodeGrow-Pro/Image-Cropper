@@ -1,15 +1,28 @@
-.card {
-    transition:
-      transform 150ms ease,
-      box-shadow 150ms ease;
-  
-    &:hover {
-      transform: scale(1.01);
-      box-shadow: var(--mantine-shadow-md);
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap');
+
+.grid-wrapper{
+      --auto-grid-min-size: 16rem;
+      display: grid;
+      grid-gap: 2rem;
+      grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+   font-family: 'Montserrat', sans-serif;
+
     }
-  }
-  
-  .title {
-    font-family: 'Greycliff CF', var(--mantine-font-family);
-    font-weight: bold;
-  }
+    .grid-wrapper li{
+      background-color: #ef4444;
+      color: #ffffff;
+      font-size: 24px;
+      list-style-type: none;
+      padding: 5rem 1rem;
+      text-align: center;
+      text-transform: capitalize;
+      font-weight: 600;
+    }
+    .main-container{
+      margin: 0 auto;
+      max-width: 1170px;
+      padding:2rem 1rem;
+    }

@@ -3,6 +3,7 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { Group, Stack, Paper, Button, Text } from "@mantine/core";
 import { IconAlertCircle, IconCheck } from "@tabler/icons";
+import { uploadImage, uploadPdf } from '../../utils/apis';
 
 const ImageToPdfConverter = ({ imageUrl, setIsGenerateReport }) => {
     const imageContainerRef = useRef();
@@ -17,7 +18,8 @@ const ImageToPdfConverter = ({ imageUrl, setIsGenerateReport }) => {
 
         const pdf = new jsPDF('p', 'mm', 'a4');
         pdf.addImage(imgData, 'PNG', 10, 10, 190, 0);
-        pdf.save('converted_image.pdf');
+       const datafile =  pdf.save('converted_image.pdf');
+        uploadPdf(datafile)
         setIsGenerateReport(false)
     };
 
@@ -76,7 +78,9 @@ const ImageToPdfConverter = ({ imageUrl, setIsGenerateReport }) => {
                         </div>
                     </div>
                     <Group>
-                        <Button onClick={convertToPdf}>Download Pdf</Button>
+                        <Button onClick={()=>{
+                            convertToPdf()
+                        }}>Download Pdf & Save</Button>
                         <Button
                             onClick={() => setIsGenerateReport(false)}
                             sx={{ height: "auto" }}

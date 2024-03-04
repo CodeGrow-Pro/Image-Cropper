@@ -226,7 +226,7 @@ function CropingImage() {
           <br />
           <div className="displayFlex">
             <Button onClick={() => setIsTakePhotoByCamera(true)}>Take a photo</Button>
-            {/* <Button onClick={() => navigate('/history')}>Access History</Button> */}
+            <Button onClick={() => navigate('/history')}>Access History</Button>
           </div>
         </>
       )}

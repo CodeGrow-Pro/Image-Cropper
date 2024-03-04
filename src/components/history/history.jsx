@@ -1,6 +1,8 @@
 import { SimpleGrid, Card, Image, Text, Container, AspectRatio } from '@mantine/core';
 import classes from './history.css';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import moment from 'moment';
 
 const mockdata = [
   {
@@ -30,23 +32,37 @@ const mockdata = [
 ];
 
 export function History() {
-  const cards = mockdata.map((article) => (
-    <Card key={article.title} p="md" radius="md" component="a" href="#" className={classes.card}>
-      <AspectRatio ratio={1920 / 1080}>
-        <Image src={article.image} />
-      </AspectRatio>
-      <Text c="dimmed" size="xs" tt="uppercase" fw={700} mt="md">
-        {article.date}
-      </Text>
-      <Text className={classes.title} mt={5}>
-        {article.title}
-      </Text>
-    </Card>
-  ));
+  const [photos, setPhotos] = useState([])
+  const getAllPhotos = async () => {
+    try {
+      await axios.get('http://localhost:3312/gallary/v1/photos/filter?userId=63e1532bac33633a3df896e3').then((result) => {
+        if (result.data.Photos) {
+          setPhotos(result?.data?.Photos)
+        }
+      })
+    } catch (error) {
 
+    }
+  }
+
+  useEffect(() => {
+    getAllPhotos()
+  }, [])
   return (
-    <Container py="xl">
-      <SimpleGrid cols={{ base: 1, sm: 2 }}>{cards}</SimpleGrid>
-    </Container>
+    <section>
+      <div class="main-container">
+        <ul class="grid-wrapper">
+          {
+            photos?.map((photo, index) => {
+              return <div>
+                <img src={photo?.imagesPath} />
+                <p>image {index + 1}</p>
+              </div>
+            })
+          }
+        </ul>
+        {photos?.length == 0 && <h3>Cropped Image Not found!</h3>}
+      </div>
+    </section>
   );
 }
