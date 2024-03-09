@@ -108,7 +108,6 @@ function TakeImage(props) {
     return (
         <div className='container-fluid'>
             <div className='row mt-4'>
-            
                 {
                     !imgPath && <div className='col-12 text-center'>
                         {playing && <div style={{

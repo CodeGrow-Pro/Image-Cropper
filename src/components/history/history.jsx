@@ -54,10 +54,12 @@ export function History() {
         <ul class="grid-wrapper">
           {
             photos?.map((photo, index) => {
-              return <div>
-                <img src={photo?.imagesPath} />
+              return <a href={photo?.imagesPath} target="_blank">
+                <div>
+                <img src={photo?.imagesPath} width={'200px'} height={'200px'}/>
                 <p>image {index + 1}</p>
               </div>
+              </a>
             })
           }
         </ul>
